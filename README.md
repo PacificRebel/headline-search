@@ -1,24 +1,9 @@
-# README
+rails new headline-search --skip-active-record
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+install bootstrap and excon gems (for calling APIs and styling, respectively)
 
-Things you may want to cover:
+create HeadlineController file in app/controllers
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+attempt rails s, and when it doesn't work, uninstall the uncooperative gems  
+and reinstall again, individually (e.g. gem uninstall puma...   
+then gem install puma)
