@@ -7,6 +7,10 @@ gem 'bootstrap', '~> 4.4.1'
 
 gem 'excon'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+
+gem 'figaro'
+# this creates file for environmental variables
+
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
