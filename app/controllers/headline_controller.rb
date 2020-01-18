@@ -27,16 +27,18 @@ class HeadlineController < ApplicationController
         # 'X-API-Key' => Figaro.env.X_API_KEY
         'Content-Type' => 'application/json'},
       body: {
-	       "queryString" => params[:title],
+	       "queryString" => params[:headline],
 	       "resultContext" => {
-		     "aspects" => [  "title","lifecycle","location","summary","editorial" ]
+		     "aspects" => [  "title"
+           # ,"lifecycle","location","summary","editorial"
+         ]
 	}
 
-      }.to_json
+}.to_json
     )
     # return nil if response.status != 200
 
-    @headlines = JSON.parse(response.body)
+    JSON.parse(response.body)
   end
 
   def find_headline(title)
