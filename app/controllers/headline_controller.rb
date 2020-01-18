@@ -1,9 +1,11 @@
+
 class HeadlineController < ApplicationController
 
   def index
   end
 
-# the :headline param is coming from the index.html.erb file, user input field
+
+# the :queryString param is coming from the index.html.erb file, user input field
   def search
     headlines = find_headline(params[:headline])
 
@@ -11,6 +13,7 @@ class HeadlineController < ApplicationController
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
     end
+    @headlines = headlines
   end
 
   private
@@ -19,20 +22,33 @@ class HeadlineController < ApplicationController
   p  response = Excon.post(
       url,
       headers: {
-        'X-API-Host' => ("http://api.ft.com/content/search/v1?"),
-        'X-API-Key' => ('59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5')
-      }
+        # 'X-API-Host' => URI.parse(url).host,
+        'X-API-Key' => '59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5',
+        # 'X-API-Key' => Figaro.env.X_API_KEY
+        'Content-Type' => 'application/json'},
+      body: {
+	       "queryString" => params[:title],
+	       "resultContext" => {
+		     "aspects" => [  "title","lifecycle","location","summary","editorial" ]
+	}
+
+      }.to_json
     )
     # return nil if response.status != 200
 
-  p  JSON.parse(response.body)
+    @headlines = JSON.parse(response.body)
   end
 
-# the api in the following method is possibly wrong
-  def find_headline(name)
+  def find_headline(title)
+    query = URI.encode("#{title}")
+
     request_api(
-      "http://api.ft.com/content/search/v1?"
+      "https://api.ft.com/content/search/v1"
+      # "https://api.ft.com/content/search/v1?apiKey=59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5"
+      # "http://api.ft.com/content/search/v1?59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5=&Content-Type=application/jason/"
     )
   end
 
 end
+
+# response = Unirest.post uri, headers:{"content-length" => "500", "content-type" => "application/json", "authorization" => "Bearer" + " " + apikey}, parameters: {"Inputs" => {"input1" => {"ColumnNames" => ["Case Number", "Case Type", "Address", "Description", "Case Group", "Date Case Created", "Last Inspection Date", "Last Inspection Result", "Status", "Permit and Complaint Status URL", "Latitude", "Longitude", "Location"], "Values" => [["0", "value","value","value","value","", "","value","value","value","0", "0", "value"],["0", "value","value","value","value","", "","value","value","value","0", "0", "value"]]}}, "GlobalParameters" => {}}.to_json
