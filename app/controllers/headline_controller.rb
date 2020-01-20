@@ -13,13 +13,16 @@ class HeadlineController < ApplicationController
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
     end
-    @headlines = headlines
+    @headlines = headlines.to_a[1][1]
+    # @headlines.map(&:title)
+    # [1].map { |x| x.values }
+    # .dig(:title)
   end
 
   private
 
   def request_api(url)
-  p  response = Excon.post(
+    response = Excon.post(
       url,
       headers: {
         # 'X-API-Host' => URI.parse(url).host,
@@ -43,7 +46,7 @@ class HeadlineController < ApplicationController
   def find_headline(title)
 
     request_api(
-      "https://api.ft.com/content/search/v1"
+      "https://api.ft.com/content/search/v1/"
     )
   end
 
