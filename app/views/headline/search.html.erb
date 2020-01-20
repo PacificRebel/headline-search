@@ -2,7 +2,9 @@
       <h3>Headlines for the first 20 stories which include your search word:</h3>
 <br>
 <body>
-      <%= @headlines.each do |k,v| %>
-  <a href=<%= k %>>: <%= v %> <br />
+      <% @headlines.each do |k,v| %>
+  <a href=<%= k %>>: <%= v %> <br>
+
 <% end %></a>
+
 </body>
