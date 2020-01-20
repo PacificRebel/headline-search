@@ -4,7 +4,7 @@
       <h4>Headlines</h4>
       <dl>
         <dt>Headline</dt>
-        <dd><%= @headlines.pluck("results") %></dd>
+        <dd><%= @headlines.pluck("results")[0].pluck("title") %></dd>
       </dl>
     </div>
   </div>
