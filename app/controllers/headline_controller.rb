@@ -23,8 +23,8 @@ class HeadlineController < ApplicationController
       url,
       headers: {
         # 'X-API-Host' => URI.parse(url).host,
-        'X-API-Key' => '59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5',
-        # 'X-API-Key' => Figaro.env.X_API_KEY
+        # 'X-API-Key' => '59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5',
+        'X-API-Key' => Figaro.env.X_API_KEY,
         'Content-Type' => 'application/json'},
       body: {
 	       "queryString" => params[:headline],
@@ -37,17 +37,13 @@ class HeadlineController < ApplicationController
 }.to_json
     )
     # return nil if response.status != 200
-
     JSON.parse(response.body)
   end
 
   def find_headline(title)
-    query = URI.encode("#{title}")
 
     request_api(
       "https://api.ft.com/content/search/v1"
-      # "https://api.ft.com/content/search/v1?apiKey=59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5"
-      # "http://api.ft.com/content/search/v1?59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5=&Content-Type=application/jason/"
     )
   end
 
