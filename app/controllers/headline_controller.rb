@@ -13,7 +13,8 @@ class HeadlineController < ApplicationController
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
     end
-    @headlines = headlines.to_a[1][1]
+    @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("apiUrl", "title")
+    # .join("/n")
     # @headlines.map(&:title)
     # [1].map { |x| x.values }
     # .dig(:title)
@@ -32,6 +33,8 @@ class HeadlineController < ApplicationController
       body: {
 	       "queryString" => params[:headline],
 	       "resultContext" => {
+           "maxResults" => "20",
+           "offset" => "21",
 		     "aspects" => [  "title"
            # ,"lifecycle","location","summary","editorial"
          ]

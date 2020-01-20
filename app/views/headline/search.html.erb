@@ -1,10 +1,5 @@
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-lg-6">
-      <h4>Headlines</h4>
-      <dl>
-        <dt>Headline</dt>
-        <dd><%= @headlines.pluck("results")[0].pluck("apiUrl", "title") %></dd>
-      </dl>
-    </div>
-  </div>
+
+      <h3>Headlines for the first 20 stories which include your search word:</h3>
+<br>
+
+      <%= @headlines %>
