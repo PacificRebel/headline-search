@@ -13,12 +13,9 @@ class HeadlineController < ApplicationController
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
     end
-    @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("apiUrl", "title").to_h
 
-    # .join("/n")
-    # @headlines.map(&:title)
-    # [1].map { |x| x.values }
-    # .dig(:title)
+    p @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+
   end
 
   private
@@ -36,7 +33,7 @@ class HeadlineController < ApplicationController
 	       "resultContext" => {
            "maxResults" => "20",
            "offset" => "21",
-		     "aspects" => [  "title"
+		     "aspects" => [  "title", "location"
            # ,"lifecycle","location","summary","editorial"
          ]
 	}
