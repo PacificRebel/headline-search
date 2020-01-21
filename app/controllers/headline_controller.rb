@@ -4,8 +4,6 @@ class HeadlineController < ApplicationController
   def index
   end
 
-
-# the :queryString param is coming from the index.html.erb file, user input field
   def search
     headlines = find_headline(params[:headline])
 
@@ -15,7 +13,6 @@ class HeadlineController < ApplicationController
     end
 
     @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
-    # JSON.parse(response)["results"][0]["city"]
 
   end
 
@@ -25,8 +22,6 @@ class HeadlineController < ApplicationController
     response = Excon.post(
       url,
       headers: {
-        # 'X-API-Host' => URI.parse(url).host,
-        # 'X-API-Key' => '59cbaf20e3e06d3565778e7bae03f49b50a742d89521203e74d426e5',
         'X-API-Key' => Figaro.env.X_API_KEY,
         'Content-Type' => 'application/json'},
       body: {
@@ -35,13 +30,11 @@ class HeadlineController < ApplicationController
            "maxResults" => "20",
            "offset" => "21",
 		     "aspects" => [  "title", "location"
-           # ,"lifecycle","location","summary","editorial"
          ]
 	}
 
 }.to_json
     )
-    # return nil if response.status != 200
     JSON.parse(response.body)
 
   end
@@ -54,5 +47,3 @@ class HeadlineController < ApplicationController
   end
 
 end
-
-# response = Unirest.post uri, headers:{"content-length" => "500", "content-type" => "application/json", "authorization" => "Bearer" + " " + apikey}, parameters: {"Inputs" => {"input1" => {"ColumnNames" => ["Case Number", "Case Type", "Address", "Description", "Case Group", "Date Case Created", "Last Inspection Date", "Last Inspection Result", "Status", "Permit and Complaint Status URL", "Latitude", "Longitude", "Location"], "Values" => [["0", "value","value","value","value","", "","value","value","value","0", "0", "value"],["0", "value","value","value","value","", "","value","value","value","0", "0", "value"]]}}, "GlobalParameters" => {}}.to_json
