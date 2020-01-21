@@ -12,7 +12,12 @@ class HeadlineController < ApplicationController
       return render action: :index
     end
 
-    p @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+  p  @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location")
+    # wrong: headlines.to_h.map {|x| x.values_at("title")}
+    # wrong: .fetch_values("title", "location")
+    # wrong:  .to_a[0].to_h.pluck[("title") ("location")]
+    # works: headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+
 
   end
 
