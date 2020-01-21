@@ -3,17 +3,19 @@
 <br>
 <body>
 
-  <% @printable_headlines = @headlines.each do |key, value|
+  <% @headlines.each do |key, value|
   key.each do |k,v| %>
   <%=v %>
 <br>
   <% end %>
-    <a href=<% value.each do |k,v| %>
+    <% value.each do |k,v| %>
+    <a href=<%=v %>>
+      Link to article above</a>
+    <br>
+<br>
+      <% end %>
 
-      <%=v %>
-      <br>
     <% end %>
-    <% end %></a>
 
 
 </body>
