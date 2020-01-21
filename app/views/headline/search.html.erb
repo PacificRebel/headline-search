@@ -2,8 +2,18 @@
       <h3>Headlines for the first 20 stories which include your search word:</h3>
 <br>
 <body>
-      <% @headlines.each do |k,v| %>
-      <%= k %> <%= v %> <br>
 
-      <% end %>
+  <% @printable_headlines = @headlines.each do |key, value|
+  key.each do |k,v| %>
+  <%=v %>
+<br>
+  <% end %>
+    <a href=<% value.each do |k,v| %>
+
+      <%=v %>
+      <br>
+    <% end %>
+    <% end %></a>
+
+
 </body>

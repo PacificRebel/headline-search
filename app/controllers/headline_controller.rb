@@ -14,7 +14,8 @@ class HeadlineController < ApplicationController
       return render action: :index
     end
 
-    p @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+    @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+    # JSON.parse(response)["results"][0]["city"]
 
   end
 
@@ -42,6 +43,7 @@ class HeadlineController < ApplicationController
     )
     # return nil if response.status != 200
     JSON.parse(response.body)
+
   end
 
   def find_headline(title)
