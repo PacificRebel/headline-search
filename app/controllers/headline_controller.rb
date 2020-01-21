@@ -12,7 +12,7 @@ class HeadlineController < ApplicationController
       return render action: :index
     end
 
-    @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+    p @headlines = headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
 
   end
 
