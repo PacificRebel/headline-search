@@ -21,7 +21,6 @@ class HeadlineController < ApplicationController
     end
   end
 end
-
   private
 
   def request_api(url)
