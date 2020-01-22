@@ -12,8 +12,12 @@ class HeadlineController < ApplicationController
       return render action: :index
     end
 
-  p  @headlines = headlines.pluck("results").first.pluck("title", "location")
+  p  @headlines = headlines[0]["results"].pluck("title", "location").to_h
+    # works locally but not on Heroku: headlines.pluck("results").first.pluck("title", "location")
     # works locally but not on Heroku: headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+
+    # @country = countries.first
+    # @weather = find_weather(@country['capital'], @country['alpha2Code'])
   end
 
   private
@@ -39,10 +43,10 @@ class HeadlineController < ApplicationController
 
   end
 
-  def find_headline(headline)
+  def find_headline(title)
 
     request_api(
-      "https://api.ft.com/content/search/v1?queryString={:headline}sortOrder={Desc}"
+      "https://api.ft.com/content/search/v1/"
     )
   end
 
