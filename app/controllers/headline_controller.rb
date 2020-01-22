@@ -12,7 +12,7 @@ class HeadlineController < ApplicationController
     #   return render action: :index
     # end
 
-  p  @headlines = headlines
+    @headlines = headlines
     # works locally but not on Heroku: headlines[0]["results"].pluck("title", "location").to_h
     # works locally but not on Heroku: headlines[0]["results"].first(20).pluck("title", "location").to_h
     # this gets first headline and nothing else: headlines[0]["results"][0]["title"]["title"]
@@ -46,7 +46,7 @@ class HeadlineController < ApplicationController
 
 }.to_json
     )
-    JSON.parse(response.body)["results"].first["results"]
+  p  JSON.parse(response.body)["results"].try(:first)["results"]
 
   end
 
