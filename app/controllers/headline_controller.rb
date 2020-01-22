@@ -8,14 +8,15 @@ class HeadlineController < ApplicationController
     headlines = []
     headlines << find_headline(params[:headline])
 
-p    @headlines = headlines[0]["results"]
+    @headlines_reduced = headlines[0]["results"][0]
+    p @headlines_reduced
 
-    if @headlines.include?({"indexCount"=>0, "curations"=>["ARTICLES", "BLOGS", "PAGES", "PODCASTS", "VIDEOS"]})
+    if @headlines_reduced == {"indexCount"=>0, "curations"=>["ARTICLES"]}
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
 
     else
-      @plucked_headlines = @headlines.first["results"].pluck("title", "location").to_h
+      @plucked_headlines = @headlines_reduced["results"].pluck("title", "location").to_h
 
     end
   end
@@ -31,6 +32,9 @@ end
         'Content-Type' => 'application/json'},
       body: {
 	       "queryString" => params[:headline],
+         "queryContext"=> {
+           "curations"=> ["ARTICLES"]
+         },
 	       "resultContext" => {
            "maxResults" => "20",
            "offset" => "21",
