@@ -12,14 +12,14 @@ class HeadlineController < ApplicationController
     #   return render action: :index
     # end
 
-  p  @headlines = headlines[0]["results"]
+  p  @headlines = headlines
     # works locally but not on Heroku: headlines[0]["results"].pluck("title", "location").to_h
     # works locally but not on Heroku: headlines[0]["results"].first(20).pluck("title", "location").to_h
     # this gets first headline and nothing else: headlines[0]["results"][0]["title"]["title"]
     # .pluck("title", "location").to_h
     # works locally but not on Heroku: headlines.pluck("results").first.pluck("title", "location")
     # works locally but not on Heroku: headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
-    if headlines[0]["results"] == nil
+    if headlines == nil
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
     else @plucked_headlines = @headlines.pluck("title", "location").to_h
@@ -45,7 +45,7 @@ class HeadlineController < ApplicationController
 
 }.to_json
     )
-    JSON.parse(response.body)["results"]
+    JSON.parse(response.body)["results"][0]["results"]
 
   end
 
