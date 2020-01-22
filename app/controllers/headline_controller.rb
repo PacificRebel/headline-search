@@ -12,7 +12,7 @@ class HeadlineController < ApplicationController
       return render action: :index
     end
 
-  p  @headlines = headlines.to_a[1][1].pluck("results").first.pluck("title", "location")
+  p  @headlines = headlines.pluck("results").first.pluck("title", "location")
     # wrong: headlines.to_h.map {|x| x.values_at("title")}
     # wrong: .fetch_values("title", "location")
     # wrong:  .to_a[0].to_h.pluck[("title") ("location")]
@@ -38,7 +38,7 @@ class HeadlineController < ApplicationController
 
 }.to_json
     )
-    JSON.parse(response.body)
+    JSON.parse(response.body)['results']
 
   end
 
