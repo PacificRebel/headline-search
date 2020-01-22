@@ -16,7 +16,7 @@ class HeadlineController < ApplicationController
       return render action: :index
 
     else
-      @plucked_headlines = @headlines_reduced.try(:first)["results"].pluck("title", "location").to_h
+      @plucked_headlines = @headlines_reduced.try(:first)["results"].try(:pluck, "title", "location").to_h
 
     end
   end
