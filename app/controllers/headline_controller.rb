@@ -39,10 +39,10 @@ class HeadlineController < ApplicationController
 
   end
 
-  def find_headline(title)
+  def find_headline(headline)
 
     request_api(
-      "https://api.ft.com/content/search/v1?queryString={headline}"
+      "https://api.ft.com/content/search/v1?queryString={:headline}sortOrder={Desc}"
     )
   end
 
