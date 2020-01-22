@@ -1,6 +1,7 @@
 # Rails web app to search for Financial Times headlines  
 
 https://headline-search.herokuapp.com/
+(works locally, deployed version is faulty, attempting to fix)
 
 (Remember, you still need to have an FT account to read the articles.)
 
