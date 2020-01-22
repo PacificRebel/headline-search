@@ -21,10 +21,14 @@ headlines).
 ## Construction:
 
 - "rails new headline-search --skip-active-record"  
-
 - install bootstrap and excon gems (for calling APIs and styling, respectively)  
-
 - create HeadlineController file in app/controllers  
+
+## Improvements if more time:
+
+- clean up code and create a model (for separation of concerns)
+- write tests
+- use CSS not HTML
 
 -------------------------------------------------------------------------------
 
