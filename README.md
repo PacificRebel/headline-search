@@ -1,10 +1,10 @@
-Rails web app to search for Financial Times headlines  
+## Rails web app to search for Financial Times headlines  
 
 https://headline-search.herokuapp.com/
 
 (Remember, you still need to have an FT account to read the articles.)
 
-MVP requirement:  
+# MVP requirement:  
 
 Build a server-rendered site that displays an article from the Financial  
 Times. You may use FT's Developer APIs to achieve this.  
@@ -13,11 +13,12 @@ Provide a search box for users to search for headlines containing specific
 words (i.e. searching for 'brexit' should return a list of brexit-related  
 headlines).
 
-Optional extras:
+# Optional extras:
+
 - deployed on Heroku
 - has a similar look (background colour and font) as ft.com
 
-Construction:
+# Construction:
 
 - "rails new headline-search --skip-active-record"  
 
