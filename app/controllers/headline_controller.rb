@@ -7,16 +7,23 @@ class HeadlineController < ApplicationController
   def search
     headlines = find_headline(params[:headline])
 
-    unless headlines
-      flash[:alert] = 'No headlines coming up under that search word.'
-      return render action: :index
-    end
+    # unless headlines
+    #   flash[:alert] = 'No headlines coming up under that search word.'
+    #   return render action: :index
+    # end
 
-  p  @headlines = headlines[0]["results"].first(20).pluck("title", "location").to_h
+  p  @headlines = headlines[0]["results"]
+    # works locally but not on Heroku: headlines[0]["results"].pluck("title", "location").to_h
+    # works locally but not on Heroku: headlines[0]["results"].first(20).pluck("title", "location").to_h
     # this gets first headline and nothing else: headlines[0]["results"][0]["title"]["title"]
     # .pluck("title", "location").to_h
     # works locally but not on Heroku: headlines.pluck("results").first.pluck("title", "location")
     # works locally but not on Heroku: headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
+    if headlines[0]["results"] == nil
+      flash[:alert] = 'No headlines coming up under that search word.'
+      return render action: :index
+    else @plucked_headlines = @headlines.pluck("title", "location").to_h
+    end
   end
 
   private
@@ -38,11 +45,11 @@ class HeadlineController < ApplicationController
 
 }.to_json
     )
-    JSON.parse(response.body)['results']
+    JSON.parse(response.body)["results"]
 
   end
 
-  def find_headline(title)
+  def find_headline(search_word_params)
 
     request_api(
       "https://api.ft.com/content/search/v1/"
