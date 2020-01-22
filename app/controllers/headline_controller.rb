@@ -19,8 +19,9 @@ class HeadlineController < ApplicationController
     # .pluck("title", "location").to_h
     # works locally but not on Heroku: headlines.pluck("results").first.pluck("title", "location")
     # works locally but not on Heroku: headlines.to_a[1][1].pluck("results")[0].pluck("title", "location").to_h
-    if headlines == nil
+    if headlines.nil?
       flash[:alert] = 'No headlines coming up under that search word.'
+      # currently not working because I removed the alert from the index page as it was showing up all the time
       return render action: :index
     else @plucked_headlines = @headlines.pluck("title", "location").to_h
     end
@@ -45,7 +46,7 @@ class HeadlineController < ApplicationController
 
 }.to_json
     )
-    JSON.parse(response.body)["results"][0]["results"]
+    JSON.parse(response.body)["results"].first["results"]
 
   end
 
