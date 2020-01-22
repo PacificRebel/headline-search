@@ -42,7 +42,7 @@ class HeadlineController < ApplicationController
   def find_headline(title)
 
     request_api(
-      "https://api.ft.com/content/search/v1/"
+      "https://api.ft.com/content/search/v1?queryString={headline}"
     )
   end
 
