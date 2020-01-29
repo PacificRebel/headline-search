@@ -8,10 +8,10 @@ class HeadlineController < ApplicationController
     headlines = []
     headlines << find_headline(params[:headline])
 
-    @headlines_reduced = headlines[0]["results"]
-    p @headlines_reduced
+    p @headlines_reduced = headlines[0]["results"]
+    @headlines_reduced
 
-    if @headlines_reduced == [{"indexCount"=>0, "curations"=>["ARTICLES"]}]
+    if headlines[0]["results"][0]["results"] == nil
       flash[:alert] = 'No headlines coming up under that search word.'
       return render action: :index
 
