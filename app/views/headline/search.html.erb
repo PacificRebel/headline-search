@@ -1,0 +1,30 @@
+<body>
+  <link rel="shortcut icon" href="/public/FTfavicon.ico"/>
+
+<style>
+body {
+  background-color: #FFF1E0;
+}
+</style>
+
+<h2><p><font face="Financier Display" color="black">Headlines for the first 20 stories which include your search word:</font></p></h2>
+
+<p><font face="Financier Text" color="black">
+
+  <% @plucked_headlines.each do |key, value|
+  key.each do |k,v| %>
+  <%=v %>
+<br>
+  <% end %>
+    <% value.each do |k,v| %>
+    <a href=<%=v %>>
+      Link to article above</a>
+    <br>
+<br>
+      <% end %>
+
+    <% end %>
+    </font></p>
+
+
+</body>
