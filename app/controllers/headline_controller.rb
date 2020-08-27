@@ -5,15 +5,15 @@ class HeadlineController < ApplicationController
   end
 
   def search
-    headlines = []
-    headlines << find_headline(params[:headline])
+    @headlines = []
+    @headlines << find_headline(params[:headline])
 
-    @headlines = headlines[0]["results"]
+    @headlines_abridged = @headlines[0]["results"]
 
     @indexCount = @headlines.pluck("indexCount")
 
-      if @indexCount[0] > 0
-         @plucked_headlines = @headlines.first["results"].pluck("title", "location").to_h
+      if @headlines_abridged.present?
+         @plucked_headlines = @headlines_abridged.first["results"].pluck("title", "location").to_h
 
       else
          # flash[:alert] = 'No headlines coming up under that search word.'
