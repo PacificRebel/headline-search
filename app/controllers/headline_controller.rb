@@ -14,7 +14,7 @@ class HeadlineController < ApplicationController
 
       if @headlines_abridged.present?
          @plucked_headlines = @headlines_abridged.first["results"].pluck("title", "location").to_h
-
+         return render action: :search
       else
          # flash[:alert] = 'No headlines coming up under that search word.'
          return render action: :index
