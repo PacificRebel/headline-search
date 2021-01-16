@@ -8,13 +8,12 @@ class HeadlineController < ApplicationController
     @headlines = []
     @headlines << find_headline(params[:headline])
 
-    @headlines_abridged = @headlines[0]["results"]
+    p @plucked_headlines = @headlines[0]["results"].first["results"]
 
-    @indexCount = @headlines.pluck("indexCount")
+      if @plucked_headlines != nil
 
-      if @headlines_abridged.present?
-         @plucked_headlines = @headlines_abridged.first["results"].pluck("title", "location").to_h
-         #is this follwing line correct? Why is Heroku rendering headline.index.html.erb when there's a result?
+        @results_headlines = @plucked_headlines.pluck("title", "location").to_h
+
          return render action: :search
       else
          # flash[:alert] = 'No headlines coming up under that search word.'
@@ -44,7 +43,7 @@ end
 
 }.to_json
     )
-    p JSON.parse(response.body)
+   JSON.parse(response.body)
 
   end
 
