@@ -8,11 +8,11 @@ class HeadlineController < ApplicationController
     @headlines = []
     @headlines << find_headline(params[:headline])
 
-    p @results_headlines = @headlines[0]["results"].first
+    @results_headlines = @headlines[0]["results"].first
 
       if @results_headlines.include?("results")
 
-         @final_headlines = @results_headlines["results"].pluck("title", "location").to_h
+         @final_headlines = @results_headlines["results"]&.pluck("title", "location")&.to_h
 
          return render action: :search
       else
