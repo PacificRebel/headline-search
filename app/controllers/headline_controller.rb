@@ -10,10 +10,10 @@ class HeadlineController < ApplicationController
 
     @headlines_abridged = @headlines[0]["results"]
 
-    @indexCount = @headlines.pluck("indexCount")
+    @indexCount = @headlines_abridged.dig("indexCount")
 
       if @headlines_abridged.present?
-         @plucked_headlines = @headlines_abridged.first["results"].pluck("title", "location").to_h
+         @plucked_headlines = @indexCount.first["results"].dig("title", "location").to_h
          #is this follwing line correct? Why is Heroku rendering headline.index.html.erb when there's a result?
          return render action: :search
       else
@@ -36,15 +36,15 @@ end
            "curations"=> ["ARTICLES"]
          },
 	       "resultContext" => {
-           "maxResults" => "20",
-           "offset" => "21",
+           "maxResults" => "5",
+           "offset" => "6",
 		     "aspects" => [  "title", "location"
          ]
 	}
 
 }.to_json
     )
-    JSON.parse(response.body)
+    p JSON.parse(response.body)
 
   end
 

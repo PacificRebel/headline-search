@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '3.0.0'
 
 gem 'bootstrap', '~> 4.4.1'
 
@@ -11,7 +11,7 @@ gem 'excon'
 gem 'figaro'
 # this creates file for environmental variables
 
-gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+gem 'rails', '~> 6.1.1', '>= 6.1.1'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
