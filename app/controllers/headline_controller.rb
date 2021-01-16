@@ -10,7 +10,7 @@ class HeadlineController < ApplicationController
 
     p @results_headlines = @headlines[0]["results"].first
 
-      if @results_headlines != nil
+      if @results_headlines.dig("indexcount").to_i != 0
 
         @final_headlines = @results_headlines["results"].pluck("title", "location").to_h
 
