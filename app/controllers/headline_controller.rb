@@ -36,8 +36,8 @@ end
            "curations"=> ["ARTICLES"]
          },
 	       "resultContext" => {
-           "maxResults" => "5",
-           "offset" => "6",
+           "maxResults" => "20",
+           "offset" => "21",
 		     "aspects" => [  "title", "location"
          ]
 	}
