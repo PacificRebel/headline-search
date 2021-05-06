@@ -8,11 +8,11 @@ class HeadlineController < ApplicationController
     @headlines = []
     @headlines << find_headline(params[:headline])
 
-    @results_headlines = @headlines[0]["results"].first
+    @results_headlines = @headlines[0]
 
       if @results_headlines.include?("results")
 
-         @final_headlines = @results_headlines["results"]&.pluck("title", "location")&.to_h
+         @final_headlines = @results_headlines["results"].first["results"].pluck("title", "location").to_h
 
          return render action: :search
       else
@@ -35,8 +35,8 @@ end
            "curations"=> ["ARTICLES"]
          },
 	       "resultContext" => {
-           "maxResults" => "20",
-           "offset" => "21",
+           "maxResults" => "5",
+           "offset" => "6",
 		     "aspects" => [  "title", "location"
          ]
 	}
