@@ -1,6 +1,6 @@
 
 # headline_search
-=======
+
 # Rails web app to search for Financial Times headlines  
 
 https://headline-search.herokuapp.com/  
