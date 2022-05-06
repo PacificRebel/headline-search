@@ -8,6 +8,14 @@ https://headline-search.herokuapp.com/
 
 (Remember, you still need to have an FT account to read the articles.)
 
+=======
+Current problem:  
+- can't run rails s, because it fails integrity check  
+- trying to fix with 'yarn install' but this runs into:  
+error /Users/heli/Projects/headline-search/node_modules/node-sass: Command failed.  
+Exit code: 1  
+and node-gyp issue  
+
 ## MVP requirement:  
 
 Build a server-rendered site that displays an article from the Financial  
